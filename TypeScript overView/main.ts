@@ -1,3 +1,6 @@
+// ! TS Documentation Link (https://www.typescriptlang.org/docs/)
+
+// ========================================== OVERVIEW ==========================================
 /* Types In TS */
 //* ------------------------number
 // * Declaring type number with giving the specific type to the assigned value
