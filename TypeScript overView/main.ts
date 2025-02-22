@@ -38,7 +38,6 @@ let F: boolean = false;
 let U: undefined = undefined;
 let N: null = null;
 
-
 //  ===================================================================
 // * ----------------------string
 let myName = "Hala";
@@ -89,8 +88,8 @@ customValue="bye"
 
 //  ===================================================================
 // * ----------------------functions
-const add1 = (n1: any, n2:any ) => {
-  return n1 + n2 ;
+const add1 = (n1: any, n2: any) => {
+  return n1 + n2;
 };
 add1("hi", 1);
 // this function will infer the the types of parameters and returned value to any
@@ -144,25 +143,24 @@ they consist of:
 */
 // Here we declare a class
 class MyClass {
-  //  Here we define the names and types of the properties 
+  //  Here we define the names and types of the properties
   // propertyThree: string[] = [];
- private  propertyThree: string[] = [];
+  private propertyThree: string[] = [];
   /* We give propertyThree its value because we always want it to have it when building the class and there is no need to pass dynamically through the constructor this will allow to acces  the property directly from the class an do functionality directly without the need of a method
   Since propertyThree is explicitly initialized with [] (which is an empty array of strings), TypeScript infers its type as string[] automatically.
   ! But this causes in consistency in code 
   * to solve this problem in TS we specify the property as "private"
   * OR Initialize via the constructor for more flexibilit if the initial default value may change
   */
-//  -------------------------------------------------------------------
+  //  -------------------------------------------------------------------
   // *Read only : To view the property without allowing mutation and can be viewed externally unless combined with "private"
-readonly data= "this is a readonly data that doesn't have to be changed"
-  // Here we initiate the constructor and optionally we can initiate the properties 
+  readonly data = "this is a readonly data that doesn't have to be changed";
+  // Here we initiate the constructor and optionally we can initiate the properties
   // First way is to call the property only as defined before , and will infer to type any even if we specified a type here because its not explicitly declared, and by default it sets public even if we don't write it
- propertyOne: string
+  propertyOne: string;
   // Second way is to define the property in the instructor with its type , this will remove the need of define before or in the insntructor , while using this way it is essential to use public of private keywords
-  constructor( propertyOne: string, public propertyTwo: number) {
+  constructor(propertyOne: string, public propertyTwo: number) {
     this.propertyOne = propertyOne;
-
   }
 
   // Here we start writing methods
@@ -176,10 +174,9 @@ readonly data= "this is a readonly data that doesn't have to be changed"
   }
 }
 
-
 //  -------------------------------------------------------------------
 // Creating instances
-const instance1 = new MyClass('count',2)
+const instance1 = new MyClass("count", 2);
 /* 
 constructor MyClass(propertyOne: any, propertyTwo: number): MyClass
 Here we can see the differnce between the definition of propertyOne and propertyTwo
@@ -187,16 +184,16 @@ one is infered to type "any" while two is explicited to type "number"
 */
 //  -------------------------------------------------------------------
 // acccesing methods
-instance1.method1()
+instance1.method1();
 //  -------------------------------------------------------------------
 // acccesing readonly public property
-console.log(instance1.data)
+console.log(instance1.data);
 
 //  ===================================================================
-// * ----------------------running a TS program in development 
+// * ----------------------running a TS program in development
 /* 
  A TS program cannot be run on understood on browser , so it needs to be transpiled to Javascript*/
- /* When we eant to run a TS program in TS in develpment using node
+/* When we eant to run a TS program in TS in develpment using node
 - initialize package.json : npm init-y 
 - Install typescript module
 - Install ts-node
