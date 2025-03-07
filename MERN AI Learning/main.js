@@ -8,11 +8,18 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 // routes 
-
+const userRouter=require("./routes/users")
+const roleRouter=require("./routes/roles")
 
 
 
 // endpoints
+
+// role endpoint
+app.use("/role",roleRouter)
+
+// user endpiont
+app.use("/user",userRouter)
 
 
 
