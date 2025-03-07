@@ -10,6 +10,8 @@ app.use(express.json());
 // routes 
 const userRouter=require("./routes/users")
 const roleRouter=require("./routes/roles")
+const evaluationRouter=require("./routes/evaluations")
+
 
 
 
@@ -20,6 +22,9 @@ app.use("/role",roleRouter)
 
 // user endpiont
 app.use("/user",userRouter)
+
+// evaluations endpiont
+app.use("/evaluation",evaluationRouter)
 
 
 

@@ -1,31 +1,32 @@
 const userModel = require("../models/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const user ={}
+const user = {};
 
 // create function
 user.userRegister = (req, res) => {
-  const { email,
+  const {
+    email,
     name,
     userName,
     password,
-    role,
     img,
     level,
     languages,
-    evaluations} = req.body;
+    evaluations,
+  } = req.body;
   const user = new userModel({
     email,
     name,
     userName,
     password,
-    role,
+    role:"67cb5d9c36b01b807c9ba02d",
     img,
     level,
     languages,
-    evaluations
+    evaluations,
   });
-  
+
   user
     .save()
     .then((result) => {
@@ -49,26 +50,24 @@ user.userRegister = (req, res) => {
         });
       }
 
-      if(err?.errors?.email?.name==="ValidatorError"){
-       return res.status(400).json({
-        success: false,
-        message: "The email has to contain upper and lower case letters,(.,-,_) ex:(User_1@example.com"
-      })
-    }
-    if(err?.errors?.password?.name==="ValidatorError"){
-       return res.status(400).json({
-        success: false,
-        message: err?.errors?.password?.message
-      })
-    }
-    else{
-      return res.status(500).json({
-        success: false,
-        message: err.message,
-      
-      })
-    }
-
+      if (err?.errors?.email?.name === "ValidatorError") {
+        return res.status(400).json({
+          success: false,
+          message:
+            "The email has to contain upper and lower case letters,(.,-,_) ex:(User_1@example.com",
+        });
+      }
+      if (err?.errors?.password?.name === "ValidatorError") {
+        return res.status(400).json({
+          success: false,
+          message: err?.errors?.password?.message,
+        });
+      } else {
+        return res.status(500).json({
+          success: false,
+          message: err.message,
+        });
+      }
     });
 };
 user.deleteUser = (req, res) => {
@@ -92,7 +91,7 @@ user.deleteUser = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        message: err.message
+        message: err.message,
       });
     });
 };
@@ -102,46 +101,46 @@ user.login = (req, res) => {
   const password = req.body.password;
   const userName = req?.body?.userName;
   userModel
-    .findOne({ $or: [{ email: email }, { userName: userName }] })
-      .then(async (user) => {
+    .findOne({ $or: [{ email: email }, { userName: userName }] }).  populate("role", "-_id -__v")
+    .then(async (user) => {
       console.log(user);
       if (!user) {
-        res.status(404).json(
-       {   status:false,
-          message:"The user doesn't exist"})
+        res
+          .status(404)
+          .json({ status: false, message: "The user doesn't exist" });
       } else {
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
           res.status(403).json({
             success: false,
-            message: "The email doesn't exist or the password you've entered is incorrect",
+            message:
+              "The email doesn't exist or the password you've entered is incorrect",
           });
         } else {
-          console.log("isValid:",isValid)
+          console.log("isValid:", isValid);
           const payload = {
             userId: user._id,
-            role: user.role,
-            name:user.userName
+            role: user.role.role,
+            name: user.userName,
+            permissions:user.role.permissions
           };
           const secret = process.env.Secret;
-      
+
           const options = { expiresIn: "5hr" };
           const token = jwt.sign(payload, secret, options);
-          const userId=user._id
-          const role=user.role
+          const userId = user._id;
+          const role = user.role;
           res.status(200).json({
             success: true,
             message: "Valid login credentials",
             token: token,
-            userId:userId,
-            role: role
-
+            role: role.role,
           });
         }
       }
     })
     .catch((error) => {
-      console.log(error.message)
+      console.log(error.message);
       res.status(404).json(error);
     });
 };
@@ -149,7 +148,7 @@ user.login = (req, res) => {
 user.getAllUsers = (req, res) => {
   userModel
     .find({})
-    .populate("role","-_Id -__v -permissions")
+    .populate("role", "-_Id -__v -permissions")
     .then((result) => {
       res.status(201).json({
         success: true,
