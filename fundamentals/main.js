@@ -30,7 +30,7 @@ const largestNumber = (arr) => {
 // other approach
 // const largestNumber = (arr) => Math.max(...arr);
 
-console.log(largestNumber([1, 5, 7, -8]));
+// console.log(largestNumber([1, 5, 7, -8]));
 
 // Problem Solving & Data Structures
 /* 
@@ -48,7 +48,7 @@ const reverseWord = (str) => {
   }
   return reversed;
 };
-console.log(reverseWord("Hello"));
+// console.log(reverseWord("Hello"));
 
 const maxAndMin = (arr) => {
   const arrayMax = Math.max(...arr);
@@ -56,7 +56,7 @@ const maxAndMin = (arr) => {
   return [arrayMax, arrayMin];
 };
 
-console.log(maxAndMin([-1, 0, 5, 55, -10]));
+// console.log(maxAndMin([-1, 0, 5, 55, -10]));
 
 const letterCount = (word) => {
   const counterMap = {};
@@ -64,11 +64,10 @@ const letterCount = (word) => {
   for (let i = 0; i < word.length; i++) {
     const letter = word[i];
     counterMap[letter] = (counterMap[letter] || 0) + 1;
-}
-return counterMap;
+  }
+  return counterMap;
 };
-console.log(letterCount("hellooo"));
-
+// console.log(letterCount("hellooo"));
 
 /* 
 
@@ -89,21 +88,56 @@ let obj2 = { b: 3, c: 4 };
 Expected Output: { a: 1, b: [2, 3], c: 4 }
 */
 
-const removeDuplicate =(arr)=> new Set(arr)
-console.log(removeDuplicate([1, 2, 3, 3, 4, 5, 5]))
+const removeDuplicate = (arr) => new Set(arr);
+// console.log(removeDuplicate([1, 2, 3, 3, 4, 5, 5]));
 
-const mostFrequent = (arr)=>{
-    const counterMap = {};
-let highest =0
-    for (let i = 0; i < arr.length; i++) {
-      const letter = arr[i];
-      counterMap[letter] = (counterMap[letter] || 0) + 1;
+const mostFrequent = (arr) => {
+  const counterMap = {};
+  let highest = 0;
+  for (let i = 0; i < arr.length; i++) {
+    const letter = arr[i];
+    counterMap[letter] = (counterMap[letter] || 0) + 1;
   }
   for (const [key, value] of Object.entries(counterMap)) {
-    if (highest<value){
-        highest=value
+    if (highest < value) {
+      highest = value;
     }
-    console.log(`${key}: ${value}`);
+    // console.log(`${key}: ${value}`);
   }
+};
 
-}
+/* 
+!You are building a task scheduling system for a small team. Tasks are represented as strings, and each task has a priority level (an integer from 1 to 5, where 5 is the highest priority). The system needs to process tasks in order of their priority, but when multiple tasks have the same priority, they should be processed in the order they were added (First-In-First-Out). Implement a function called 'scheduleAndProcess' that takes an array of task objects, each containing a 'name' (string) and 'priority' (integer). The function should return an array of task names in the order they should be processed according to the priority rules.
+
+
+[{name: 'Debug login issue', priority: 3}, {name: 'Update documentation', priority: 1}, {name: 'Fix critical security bug', priority: 5}, {name: 'Refactor user module', priority: 3}]
+*/
+
+/* 
+* input : array of objects containing name of task and priority 1-5
+
+*process : reach the priority value of each object in the array , find all the objects with priority of 5 and  push them then push the other ones descendengly
+
+* output: array of names of tasks fro highest to lowest priority
+
+*/
+
+const scheduleAndProcess = (tasks) => {
+  let result =[]
+  for (let priority = 5; priority >= 1; priority--) {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].priority === priority) {
+        result.push(tasks[i].name);
+      }
+    }
+  }
+// console.log(result)
+  return result;
+};
+
+scheduleAndProcess([
+  { name: "Debug login issue", priority: 3 },
+  { name: "Update documentation", priority: 1 },
+  { name: "Fix critical security bug", priority: 5 },
+  { name: "Refactor user module", priority: 3 },
+]);
