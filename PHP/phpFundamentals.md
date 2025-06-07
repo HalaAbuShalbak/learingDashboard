@@ -29,7 +29,7 @@ echo "Hello, World!";
 ```php
 <?= "Hello, World!" ?>
 ```
-[Learn more](https://www.php.net/manual/en/intro-whatis.php)
+[Learn more](https://www.php.net/manual/en/introduction.php)
 
 ---
 
@@ -114,7 +114,7 @@ if ($score >= 60) {
     Failed
 <?php endif; ?>
 ```
-[Learn more](https://www.php.net/manual/en/control-structures.alternative-syntax.php)
+[Learn more](https://www.php.net/manual/en/language.control-structures.php)
 
 ---
 
@@ -248,7 +248,7 @@ try {
 ```php
 <?= $e->getMessage() ?>
 ```
-[Learn more](https://www.php.net/manual/en/language.errors.php)
+[Learn more](https://www.php.net/manual/en/language.exceptions.php)
 
 ---
 
@@ -269,12 +269,12 @@ $stmt->execute();
 ```
 *No shorthand syntax for prepared statements.*
 [Learn more](https://www.php.net/manual/en/security.php)
+[General Security](https://www.php.net/manual/en/security.general.php)
 
 ---
 
 **References:**  
 - [PHP Manual](https://www.php.net/manual/en/index.php)
 
-Let me know if you want to expand any section or add more advanced topics!
 
 
